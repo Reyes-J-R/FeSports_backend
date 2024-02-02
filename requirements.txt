@@ -36,6 +36,7 @@ filelock==3.13.1
 frozenlist==1.4.0
 fsspec==2023.12.2
 future==0.18.2
+gunicorn==21.2.0
 gyp==0.1
 httplib2==0.20.2
 idna==3.3
