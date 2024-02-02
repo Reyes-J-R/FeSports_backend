@@ -9,8 +9,9 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import dj_database_url
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +21,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-#t%@ixyq_=1yk_gvc0i(w_7j=o8lx6g940af@jskzcqierg-_s'
+# SECRET_KEY = 'django-insecure-#t%@ixyq_=1yk_gvc0i(w_7j=o8lx6g940af@jskzcqierg-_s'
+SECRET_KEY = os.environ.get("SECRET_KEY")
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 
 
 # Application definition
@@ -85,6 +90,10 @@ DATABASES = {
     }
 }
 
+database_url = os.environ.get("DATABASE_URL")
+DATABASES['default'] = dj_database_url.parse(database_url)
+
+# postgres://fesports_db_beta_user:AzbTSgalOGhhKu6xciIkJyutpZVwTq0p@dpg-cmu89p7qd2ns738gu9p0-a.oregon-postgres.render.com/fesports_db_beta
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
