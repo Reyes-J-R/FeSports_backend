@@ -91,6 +91,7 @@ DATABASES = {
 }
 
 database_url = os.environ.get("DATABASE_URL")
+# database_url = "postgres://fesports_db_beta_user:AzbTSgalOGhhKu6xciIkJyutpZVwTq0p@dpg-cmu89p7qd2ns738gu9p0-a.oregon-postgres.render.com/fesports_db_beta"
 DATABASES['default'] = dj_database_url.parse(database_url)
 
 # postgres://fesports_db_beta_user:AzbTSgalOGhhKu6xciIkJyutpZVwTq0p@dpg-cmu89p7qd2ns738gu9p0-a.oregon-postgres.render.com/fesports_db_beta
@@ -129,6 +130,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+STATIC_ROOT= os.path.join(BASE_DIR, "staticfiles")
 STATIC_URL = 'static/'
 
 # Default primary key field type
