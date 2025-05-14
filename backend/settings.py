@@ -16,6 +16,10 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+os.environ['SECRET_KEY'] = 'django-insecure-#t%@ixyq_=1yk_gvc0i(w_7j=o8lx6g940af@jskzcqierg-_s'
+os.environ['DEBUG'] = "True"
+os.environ['ALLOWED_HOSTS'] = "localhost https://futureesports.netlify.app  https://ab62-2001-df0-b240-414-19c0-11ba-d9c8-d560.ngrok-free.app 6796-2001-df0-b240-414-19c0-11ba-d9c8-d560.ngrok-free.app"
+os.environ['DATABASE_URL'] = "postgres://fesports_db_beta_user:AzbTSgalOGhhKu6xciIkJyutpZVwTq0p@dpg-cmu89p7qd2ns738gu9p0-a.oregon-postgres.render.com/fesports_db_beta"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -92,7 +96,7 @@ DATABASES = {
 
 database_url = os.environ.get("DATABASE_URL")
 # database_url = "postgres://fesports_db_beta_user:AzbTSgalOGhhKu6xciIkJyutpZVwTq0p@dpg-cmu89p7qd2ns738gu9p0-a.oregon-postgres.render.com/fesports_db_beta"
-DATABASES['default'] = dj_database_url.parse(database_url)
+# DATABASES['default'] = dj_database_url.parse(database_url)
 
 # postgres://fesports_db_beta_user:AzbTSgalOGhhKu6xciIkJyutpZVwTq0p@dpg-cmu89p7qd2ns738gu9p0-a.oregon-postgres.render.com/fesports_db_beta
 
@@ -138,9 +142,11 @@ STATIC_URL = 'staticfiles/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:3000"
-# ]
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "https://futureesports.netlify.app",
+    "https://ab62-2001-df0-b240-414-19c0-11ba-d9c8-d560.ngrok-free.app"
+]
 
 CORS_ORIGIN_ALLOW_ALL = True
 
