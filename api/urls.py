@@ -17,7 +17,8 @@ urlpatterns = [
     path("events/<int:pk>/start/", views.start_event),
     path("events/<int:pk>/submitmatch/", views.submit_match_result),
     path("games/", views.get_games),
-    path("playerstats/", views.get_playerstats)
+    path("playerstats/", views.get_playerstats),
+    path("leaderboard/", views.get_leaderboard)
 ]
 
 if settings.DEBUG:

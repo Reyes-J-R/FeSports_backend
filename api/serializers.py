@@ -9,7 +9,7 @@ class TestSerializer(ModelSerializer):
 class UserSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'password', 'email', 'first_name', 'last_name', 'joined_events', 'is_staff']
+        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'joined_events', 'is_staff']
 
 class EventSerializer(ModelSerializer):
     class Meta:

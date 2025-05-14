@@ -290,10 +290,11 @@ def submit_match_result(request, pk):
             print(sortedtablelist)
             eventwinner = list(sortedtablelist[0].keys())[0]
             eventrunner = list(sortedtablelist[1].keys())[0]
-            eventthird = list(sortedtablelist[2].keys())[0]
+            if event.max_players > 2:
+                eventthird = list(sortedtablelist[2].keys())[0]
+                eventthird = User.objects.get(id=eventthird)
             eventwinner = User.objects.get(id=eventwinner)
             eventrunner = User.objects.get(id=eventrunner)
-            eventthird = User.objects.get(id=eventthird)
             event.winner = eventwinner
             event.runner = eventrunner
             event.third = eventthird
@@ -378,3 +379,22 @@ def get_playerstats(request):
 
 
     return Response(stats)
+
+@api_view(["POST"])
+def get_leaderboard(request):
+    players = User.objects.all()
+    players = [UserSerializer(player).data for player in players]
+    sorted_players = sorted(players, key=lambda x: len(x['joined_events']))[:5]
+    print(sorted_players)
+    for i in range(len(sorted_players)):
+        playergames = []
+        player = User.objects.get(id=sorted_players[i]['id'])
+        for event in player.joined_events.all(): playergames.append(event.eventgame.name)
+        sorted_players[i]['events_won'] = len(list(Event.objects.filter(winner=User.objects.get(id=sorted_players[i]['id']))))
+        gamecount = [{game: playergames.count(game)} for game in playergames]
+        gamecount = sorted(gamecount, key=lambda x: list(x.values())[0])
+        sorted_players[i]['main_game'] = list(gamecount[0].keys())[0]
+    print(sorted_players[:5])
+    
+    
+    return Response({'leaderboard': sorted_players})
